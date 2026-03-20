@@ -219,4 +219,4 @@ const getCidades = function(sigla){
     }
 }
 
-console.log(getCidades("sp"))
+console.log(getCidades("rj"))
