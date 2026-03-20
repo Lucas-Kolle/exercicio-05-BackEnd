@@ -10,16 +10,23 @@ const estadosCidades = require("./estados_cidades.js")
 
 //função que retorna a lista de todos as siglas dos estados do brasil
 const getListaDeEstados = function(){
+    //criando ARRAY para guardar as siglas
     let siglaEstados = []
+    //criando JSON para guardar as siglas e a quantidade
+    let retornoEstados = {
+        siglaEstados,
+        "quantidade": 0
+    }
 
     //estrutura de repetição para percorrer o array
     estadosCidades.listaDeEstados.estados.forEach(function(itemEstados){
         siglaEstados.push(itemEstados.sigla) //puxando as siglas para o array "siglaEstados" que eu criei
+        retornoEstados.quantidade = retornoEstados.quantidade +1 //adicionando 1 cada vez que passa aqui
     })
 
     //retornos da função
     if(siglaEstados)
-        return siglaEstados
+        return retornoEstados
     else
         return false
 }
@@ -56,11 +63,46 @@ else{
         //após a repetição, retornar o JSON com os valores adicionados
         return dadosEstado
     else{
-        console.log("ERRO: Não foi posível enconar o estado!")
+        console.log("ERRO: Não foi posível encontrar o estado!")
         return situacao
     }
 }
 }
 
+//que retorna as informações referente a capital de um estado
+const getCapitalEstado = function(sigla){
+    let siglaEstado = sigla
+    let dadosCapital = {}
+    //função para ajudar na condicional
+    let situacao = false
 
-console.log(getDadosEstado("tf"))
+    //condicional para validar os dados recebidos
+    if(siglaEstado == "" || !isNaN(siglaEstado)){
+        console.log("ERRO: Preencha os dados corretamente!")
+        return false
+    //continuar programa
+    }else{
+
+        //estrutura de repetição para permitir percorrer o ARRAY das siglas
+        estadosCidades.listaDeEstados.estados.forEach(function(itemEstados){
+
+            //condicional para encontar o estado desejado pela sigla
+            if(String(itemEstados.sigla).toUpperCase() == String(siglaEstado).toUpperCase()){
+                //adicionando os centeúdos ao JSON
+                dadosCapital.uf = itemEstados.sigla
+                dadosCapital.descricao = itemEstados.nome
+                dadosCapital.capital = itemEstados.capital
+                situacao = true
+            }
+        })
+
+        if(situacao)
+            return dadosCapital
+        else{
+            console.log("ERRO: Estado não encontrado!")
+            return situacao
+        }
+    }
+}
+
+console.log(getCapitalEstado("am"))
