@@ -168,8 +168,54 @@ const getCapitalPais = function(){
         }
     })
 
-    return capitalPais
+    if(capitalPais)
+        return capitalPais
+    else
+        return false
 
 }
 
-console.log(getCapitalPais())
+//função que retorna a lista de cidades de um estado
+const getCidades = function(sigla){
+    let siglaEstado = sigla
+    let estado = {}
+    let cidades = []
+    let quantidade = 0
+    let situacao = false
+
+    //condicinal para validadr dados recebidos
+    if(siglaEstado == "" || !isNaN(siglaEstado)){
+        console.log("ERRO: Todos os campos devem ser preenchidos corretamente!")
+        return false
+    //continuando programa 
+    }else{
+
+        //estrutura de repetição para percorrer o ARRAY estados
+        estadosCidades.listaDeEstados.estados.forEach(function(itemEstados){
+            
+            //condicional para pesquisar pela sigla
+            if(String(itemEstados.sigla).toUpperCase() == String(siglaEstado).toUpperCase()){
+                estado.uf = itemEstados.sigla
+                estado.descricao = itemEstados.nome
+
+                //estrutura de repetição para percorrer o ARRAY cidades
+                itemEstados.cidades.forEach(function(itemCidades){
+                    estado.quantidade_cidades = quantidade +1
+                    estado.cidades = cidades
+                    cidades.push(itemCidades.nome)
+                    situacao = true
+                })
+            }
+        })
+
+        if(situacao)
+            return estado
+        else{
+            console.log("Estado não encrontado!")
+            return false
+        }
+        
+    }
+}
+
+console.log(getCidades("sp"))
