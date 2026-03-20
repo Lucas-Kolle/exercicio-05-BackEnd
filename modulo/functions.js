@@ -105,4 +105,43 @@ const getCapitalEstado = function(sigla){
     }
 }
 
-console.log(getCapitalEstado("am"))
+//função que retorna os dados e uma determinada região do país
+const getEstadosRegiao = function(regiao){
+    let regiaoPais = regiao
+    let retornoRegiao = {}
+    let estados = []
+    //criando variável para ajudar na condicional
+    let situacao = false
+
+    //validando dados recebidos
+    if(regiaoPais == "" || !isNaN(regiaoPais)){
+        console.log("ERRO: Os dados devem ser preenchidos corretamente!")
+        return false
+
+    // continuar programa
+    }else{
+        //estrutura de repetição para percorrer o ARRAY "estados"
+        estadosCidades.listaDeEstados.estados.forEach(function(itemEstados){
+            
+            //condiconal para pesquisar a região
+            if(String(itemEstados.regiao).toUpperCase() == String(regiaoPais).toUpperCase()){
+                //adicionando conteúdos ao JSON "retornoRegiao"
+                retornoRegiao.regiao = String(itemEstados.regiao).toUpperCase() //adiciona o atributo "regiao" e coloca a região.toUpperCase
+                retornoRegiao.estados = estados //adiciona o ARRAY "estados" dentro do JSON "retornoRegiao"
+                estados.push({"uf": itemEstados.sigla, "descricao": itemEstados.nome})
+                situacao = true
+            }
+        })
+
+        //condicional para verificar se a região digitada existe
+        if(situacao)
+            return retornoRegiao
+        else{
+            console.log("ERRO: Região não encontrada!")
+            return situacao
+        }
+    }
+
+}
+
+console.log(getEstadosRegiao("centro-oeste"))
