@@ -144,4 +144,32 @@ const getEstadosRegiao = function(regiao){
 
 }
 
-console.log(getEstadosRegiao("centro-oeste"))
+//função que retorna todas as capitais da hístoria do Brasil
+const getCapitalPais = function(){
+    let capitalPais = {}
+    capitais = []
+
+    //estrutura de repetição para encontrar se já foi ou não uma capital
+    estadosCidades.listaDeEstados.estados.forEach(function(itemEstados){
+
+        //condicional para reconhecer se foi ou não uma capital
+        if(itemEstados.capital_pais){
+            capitalPais.capitais = capitais
+            capitais.push(
+                {
+                    "capital_atual": itemEstados.capital_pais.capital,
+                    "uf": itemEstados.sigla,
+                    "descricao": itemEstados.nome,
+                    "capital": itemEstados.capital,
+                    "regiao": itemEstados.regiao,
+                    "capital_pais_ano_inicio": itemEstados.capital_pais.ano_inicio,
+                    "capital_pais_ano_fim": itemEstados.capital_pais.ano_fim
+                })
+        }
+    })
+
+    return capitalPais
+
+}
+
+console.log(getCapitalPais())
