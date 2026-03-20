@@ -200,7 +200,8 @@ const getCidades = function(sigla){
 
                 //estrutura de repetição para percorrer o ARRAY cidades
                 itemEstados.cidades.forEach(function(itemCidades){
-                    estado.quantidade_cidades = quantidade +1
+                    quantidade = quantidade +1
+                    estado.quantidade_cidades = quantidade
                     estado.cidades = cidades
                     cidades.push(itemCidades.nome)
                     situacao = true
